@@ -1,25 +1,46 @@
 import java.text.NumberFormat;
 import java.util.Scanner;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
         final byte PERCENTAGE = 100;
         final byte MONTHS_YEAR = 12;
 
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Principal: ");
-        int principalValue = scanner.nextInt();
+        int principalValue;
+        float annualInterestRate;
+        byte period;
 
-        System.out.print("Annual Interest Rate: ");
-        float annualInterestRate = scanner.nextFloat();
+        while(true) {
+            System.out.print("Principal ($1K - $1M): ");
+            principalValue = scanner.nextInt();
+            if (principalValue >= 1000 && principalValue < 1000000) {
+                break;
+            } else {
+                System.out.println("Enter a number between 1,000 and 1,000,000");
+            }
+        }
+
+        while (true) {
+            System.out.print("Annual Interest Rate: ");
+            annualInterestRate = scanner.nextFloat();
+            if (annualInterestRate > 0 && annualInterestRate <= 30) {
+                break;
+            } else {
+                System.out.println("Enter a value greater than 0 and less than or equal to 30.");
+            }
+        }
         float monthlyInterestRate = annualInterestRate / PERCENTAGE / MONTHS_YEAR;
 
-        System.out.print("Period (Years): ");
-        byte period = scanner.nextByte();
+        while (true) {
+            System.out.print("Period (Years): ");
+            period = scanner.nextByte();
+            if (period > 0 && period <= 30) {
+                break;
+            } else {
+                System.out.println("Enter a value between 1 and 30.");
+            }
+        }
         int payments = period * MONTHS_YEAR;
 
         System.out.println("principalValue: " + principalValue);
@@ -35,6 +56,5 @@ public class Main {
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage*10);
 
         System.out.println("Mortgage: " + mortgageFormatted);
-
     }
 }
